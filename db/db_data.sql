@@ -32,9 +32,34 @@ INSERT INTO Teams(teamName,joindate,streetAddress,city,stateAbbrev,zipCode,coach
 INSERT INTO Teams(teamName,joindate,streetAddress,city,stateAbbrev,zipCode,coachID) VALUES ('Team1','2022-06-11','57 Buhler Way','Waco','TX',76796,2);
 
 -- spectator fave teams
+INSERT INTO SpectatorFavTeams(userName,teamName) VALUES ('brent123','Team2');
+INSERT INTO SpectatorFavTeams(userName,teamName) VALUES ('taylorlol','Team2');
+INSERT INTO SpectatorFavTeams(userName,teamName) VALUES ('jamesxd','Team9');
+INSERT INTO SpectatorFavTeams(userName,teamName) VALUES ('jamesxd','Team2');
 -- spectator fave players
+INSERT INTO SpectatorFavPlayers(userName,teamName) VALUES ('taylorlol','2');
+INSERT INTO SpectatorFavPlayers(userName,teamName) VALUES ('brent123','1');
+INSERT INTO SpectatorFavPlayers(userName,teamName) VALUES ('jamesxd','2');
+INSERT INTO SpectatorFavPlayers(userName,teamName) VALUES ('brent123','3');
 -- posts 
+INSERT INTO Posts(postID,userName,content,timePosted) VALUES (1,'cfeatherby2','This is so crazy','2023-01-26 03:04:44');
+INSERT INTO Posts(postID,userName,content,timePosted) VALUES (2,'cianinotti0','I can not wait to see how this turns out.','2022-01-16 07:27:26');
+INSERT INTO Posts(postID,userName,content,timePosted) VALUES (3,'cfeatherby2','Pretend this is a post.','2023-02-10 09:29:41');
+INSERT INTO Posts(postID,userName,content,timePosted) VALUES (4,'cianinotti0','This is so crazy','2021-11-17 17:38:01');
 -- comments 
+INSERT INTO Comments(commentID,postID,username,content,timePosted) VALUES (1,1,'sdeathridge3','I agree!','2022-11-09 06:00:03');
+INSERT INTO Comments(commentID,postID,username,content,timePosted) VALUES (2,1,'sdeathridge3','What is going on?','2022-11-27 07:27:56');
+INSERT INTO Comments(commentID,postID,username,content,timePosted) VALUES (3,1,'cfeatherby2','That is so controversial','2022-03-31 22:14:23');
+INSERT INTO Comments(commentID,postID,username,content,timePosted) VALUES (4,4,'cianinotti0','That is so controversial','2022-09-23 05:04:01');
 -- likes
 -- season
+INSERT INTO Season(Season) VALUES (2015);
+INSERT INTO Season(Season) VALUES (2016);
+INSERT INTO Season(Season) VALUES (2017);
+INSERT INTO Season(Season) VALUES (2018);
 -- games played
+INSERT INTO Season(gameId,player1ID,player2ID,team1,team2,player1Throw,player2Throw,tournamentID) VALUES (1,3,4,'Team2','Team8','Scissors','Rock',1);
+INSERT INTO Season(gameId,player1ID,player2ID,team1,team2,player1Throw,player2Throw,tournamentID) VALUES (2,2,4,'Team2','Team9','Rock','Paper',4);
+INSERT INTO Season(gameId,player1ID,player2ID,team1,team2,player1Throw,player2Throw,tournamentID) VALUES (3,1,4,'Team2','Team9','Scissors','Scissors',4);
+INSERT INTO Season(gameId,player1ID,player2ID,team1,team2,player1Throw,player2Throw,tournamentID) VALUES (4,2,2,'Team2','Team9','Rock','Scissors',3);
+

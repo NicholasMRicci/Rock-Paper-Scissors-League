@@ -57,16 +57,16 @@ CREATE TABLE Players (
 );
 
 CREATE TABLE SpectatorFavPlayers (
-    userName VARCHAR(50),
-    playerID INT AUTO_INCREMENT,
+    userName VARCHAR(50) ON DELETE CASCADE,
+    playerID INT AUTO_INCREMENT ON DELETE CASCADE,
     CONSTRAINT spectatorKeys PRIMARY KEY (userName, playerID),
     CONSTRAINT favPlayerUser FOREIGN KEY (userName) REFERENCES Spectators (userName),
     CONSTRAINT favPlayers FOREIGN KEY (playerID) REFERENCES Players (playerID)
 );
 
 CREATE TABLE SpectatorFavTeams (
-    userName VARCHAR(50),
-    teamName VARCHAR(50),
+    userName VARCHAR(50) ON DELETE CASCADE,
+    teamName VARCHAR(50) ON DELETE CASCADE,
     CONSTRAINT spectatorKeys2 PRIMARY KEY (userName, teamName),
     CONSTRAINT favTeamUser FOREIGN KEY (userName) REFERENCES Spectators (userName),
     CONSTRAINT favTeams FOREIGN KEY (teamName) REFERENCES Teams (teamName)
@@ -74,7 +74,7 @@ CREATE TABLE SpectatorFavTeams (
 
 CREATE TABLE Posts (
     postID INT PRIMARY KEY AUTO_INCREMENT,
-    userName VARCHAR(50) NOT NULL,
+    userName VARCHAR(50) NOT NULL ON DELETE CASCADE,
     content text NOT NULL,
     timePosted DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT postUser FOREIGN KEY (userName) REFERENCES Spectators (userName)
@@ -82,8 +82,8 @@ CREATE TABLE Posts (
 
 CREATE TABLE Comments (
     commentID INT PRIMARY KEY AUTO_INCREMENT,
-    postID INT NOT NULL,
-    userName VARCHAR(50) NOT NULL,
+    postID INT NOT NULL ON DELETE CASCADE,
+    userName VARCHAR(50) NOT NULL ON DELETE CASCADE,
     content text NOT NULL,
     timePosted DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT commentUser FOREIGN KEY (username) REFERENCES Spectators (userName),
@@ -91,8 +91,8 @@ CREATE TABLE Comments (
 );
 
 CREATE TABLE Likes (
-    userName VARCHAR(50),
-    postID INT,
+    userName VARCHAR(50) ON DELETE CASCADE,
+    postID INT ON DELETE CASCADE,
     CONSTRAINT likeKeys PRIMARY KEY (userName, postID),
     CONSTRAINT likeUser FOREIGN KEY (username) REFERENCES Spectators (userName),
     CONSTRAINT likePost FOREIGN KEY (postID) REFERENCES Posts (postID)
@@ -110,19 +110,19 @@ CREATE TABLE Tournament(
     zipCode VARCHAR(50) NOT NULL,
     startDate DATE NOT NULL,
     endDate DATE NOT NULL,
-    season YEAR NOT NULL,
+    season YEAR NOT NULL ON DELETE CASCADE,
     CONSTRAINT tournamentSeason FOREIGN KEY (season) REFERENCES Season (seasonYear)
 );
 
 CREATE TABLE GamesPlayed(
     gameID INT PRIMARY KEY AUTO_INCREMENT,
-    player1ID INT NOT NULL,
-    player2ID INT NOT NULL,
-    team1 VARCHAR(50) NOT NULL,
-    team2 VARCHAR(50) NOT NULL,
+    player1ID INT NOT NULL ON DELETE CASCADE,
+    player2ID INT NOT NULL ON DELETE CASCADE,
+    team1 VARCHAR(50) NOT NULL ON DELETE CASCADE,
+    team2 VARCHAR(50) NOT NULL ON DELETE CASCADE,
     player1Throw VARCHAR(8) NOT NULL,
     player2Throw VARCHAR(8) NOT NULL,
-    tournamentID INT NOT NULL,
+    tournamentID INT NOT NULL ON DELETE CASCADE,
     CONSTRAINT gamePlayer1 FOREIGN KEY (player1ID) REFERENCES Players (playerID),
     CONSTRAINT gamePlayer2 FOREIGN KEY (player2ID) REFERENCES Players (playerID),
     CONSTRAINT gameTeam1 FOREIGN KEY (team1) REFERENCES Teams (teamName),

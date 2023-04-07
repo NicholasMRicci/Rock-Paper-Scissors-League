@@ -1,9 +1,10 @@
 USE rps_league;
-
+-- spectator data
 INSERT INTO Spectators (userName, pwd) VALUES ('brent123', '1234');
 INSERT INTO Spectators (userName, pwd) VALUES ('taylorlol', 'abc');
 INSERT INTO Spectators (userName, pwd) VALUES ('jamesxd', 'rps');
 
+-- coach data
 INSERT Coaches (coachID, firstName, lastName, joinDate, birthday, phoneNumber)
     VALUES (1, 'Phil', 'Buster', '2015-07-28', '2000-9-12', '617-213-1382');
 INSERT Coaches (coachID, firstName, lastName, joinDate, birthday, phoneNumber)
@@ -42,21 +43,27 @@ INSERT INTO SpectatorFavPlayers(userName,teamName) VALUES ('brent123','1');
 INSERT INTO SpectatorFavPlayers(userName,teamName) VALUES ('jamesxd','2');
 INSERT INTO SpectatorFavPlayers(userName,teamName) VALUES ('brent123','3');
 -- posts 
-INSERT INTO Posts(postID,userName,content,timePosted) VALUES (1,'cfeatherby2','This is so crazy','2023-01-26 03:04:44');
-INSERT INTO Posts(postID,userName,content,timePosted) VALUES (2,'cianinotti0','I can not wait to see how this turns out.','2022-01-16 07:27:26');
-INSERT INTO Posts(postID,userName,content,timePosted) VALUES (3,'cfeatherby2','Pretend this is a post.','2023-02-10 09:29:41');
-INSERT INTO Posts(postID,userName,content,timePosted) VALUES (4,'cianinotti0','This is so crazy','2021-11-17 17:38:01');
+INSERT INTO Posts(postID,userName,content,timePosted) VALUES (1,'jamesxd','This is so crazy','2023-01-26 03:04:44');
+INSERT INTO Posts(postID,userName,content,timePosted) VALUES (2,'taylorlol','I can not wait to see how this turns out.','2022-01-16 07:27:26');
+INSERT INTO Posts(postID,userName,content,timePosted) VALUES (3,'taylorlol','Pretend this is a post.','2023-02-10 09:29:41');
+INSERT INTO Posts(postID,userName,content,timePosted) VALUES (4,'brent123','This is so crazy','2021-11-17 17:38:01');
 -- comments 
-INSERT INTO Comments(commentID,postID,username,content,timePosted) VALUES (1,1,'sdeathridge3','I agree!','2022-11-09 06:00:03');
-INSERT INTO Comments(commentID,postID,username,content,timePosted) VALUES (2,1,'sdeathridge3','What is going on?','2022-11-27 07:27:56');
-INSERT INTO Comments(commentID,postID,username,content,timePosted) VALUES (3,1,'cfeatherby2','That is so controversial','2022-03-31 22:14:23');
-INSERT INTO Comments(commentID,postID,username,content,timePosted) VALUES (4,4,'cianinotti0','That is so controversial','2022-09-23 05:04:01');
+INSERT INTO Comments(commentID,postID,username,content,timePosted) VALUES (1,1,'taylorlol','I agree!','2022-11-09 06:00:03');
+INSERT INTO Comments(commentID,postID,username,content,timePosted) VALUES (2,1,'brent123','What is going on?','2022-11-27 07:27:56');
+INSERT INTO Comments(commentID,postID,username,content,timePosted) VALUES (3,1,'jamesxd','That is so controversial','2022-03-31 22:14:23');
+INSERT INTO Comments(commentID,postID,username,content,timePosted) VALUES (4,4,'brent123','That is so controversial','2022-09-23 05:04:01');
 -- likes
+INSERT INSERT Likes(userName, postID) VALUES ('taylorlol', 1);
+INSERT INSERT Likes(userName, postID) VALUES ('jamesxd', 2);
+INSERT INSERT Likes(userName, postID) VALUES ('taylorlol', 4);
+INSERT INSERT Likes(userName, postID) VALUES ('brent123', 1);
+
 -- season
 INSERT INTO Season(Season) VALUES (2015);
 INSERT INTO Season(Season) VALUES (2016);
 INSERT INTO Season(Season) VALUES (2017);
 INSERT INTO Season(Season) VALUES (2018);
+
 -- games played
 INSERT INTO Season(gameId,player1ID,player2ID,team1,team2,player1Throw,player2Throw,tournamentID) VALUES (1,3,4,'Team2','Team8','Scissors','Rock',1);
 INSERT INTO Season(gameId,player1ID,player2ID,team1,team2,player1Throw,player2Throw,tournamentID) VALUES (2,2,4,'Team2','Team9','Rock','Paper',4);

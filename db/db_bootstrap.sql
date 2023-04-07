@@ -13,86 +13,119 @@ grant all privileges on rps_league.* to 'webapp' @'%';
 
 flush privileges;
 
--- Move into the database we just created.
+NULL -- Move INTo the database we just created.
 -- TODO: If you changed the name of the database above, you need to
 -- change it here too. 
 use rps_league;
 
 -- Put your DDL 
-CREATE TABLE Players (
-    playerID int,
-    firstName varchar(50),
-    lastName varchar(50),
-    birthday date,
-    joinDate date,
-    playerStatus varchar(50),
-    phoneNumber varchar(15),
-    teamName varchar(50)
+CREATE TABLE Spectators (
+    userName VARCHAR(50) PRIMARY KEY,
+    pwd VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE Coaches (
+    coachID INT PRIMARY KEY AUTO_INCREMENT,
+    firstName VARCHAR(50) NOT NULL,
+    lastName VARCHAR(50) NOT NULL,
+    joinDate DATE NOT NULL,
+    birthday DATE NOT NULL,
+    phoneNumber VARCHAR(15) NOT NULL
 );
 
 CREATE TABLE Teams (
-    teamName varchar(50),
-    joinDate date,
-    streetAddress varchar(50),
-    city varchar(50),
-    stateAbbrev varchar(2),
-    zipCode varchar(50)
+    teamName VARCHAR(50) PRIMARY KEY,
+    joinDate DATE NOT NULL,
+    streetAddress VARCHAR(50) NOT NULL,
+    city VARCHAR(50) NOT NULL,
+    stateAbbrev VARCHAR(2) NOT NULL,
+    zipCode VARCHAR(50) NOT NULL,
+    coachID INT,
+    CONSTRAINT teamCoach FOREIGN KEY (coachID) REFERENCES Coaches (coachID)
 );
 
-CREATE TABLE Spectators (userName varchar(50), pwd varchar(50));
+CREATE TABLE Players (
+    playerID INT PRIMARY KEY AUTO_INCREMENT,
+    firstName VARCHAR(50) NOT NULL,
+    lastName VARCHAR(50) NOT NULL,
+    birthday DATE NOT NULL,
+    joinDate DATE NOT NULL,
+    playerStatus VARCHAR(50) NOT NULL,
+    phoneNumber VARCHAR(15) NOT NULL,
+    teamName VARCHAR(50),
+    CONSTRAINT playerTeam FOREIGN KEY (teamName) REFERENCES Teams (teamName)
+);
 
-CREATE TABLE SpectatorFavPlayers (userName varchar(50), playerID int);
+CREATE TABLE SpectatorFavPlayers (
+    userName VARCHAR(50),
+    playerID INT AUTO_INCREMENT,
+    CONSTRAINT spectatorKeys PRIMARY KEY (userName, playerID),
+    CONSTRAINT favPlayerUser FOREIGN KEY (userName) REFERENCES Spectators (userName),
+    CONSTRAINT favPlayers FOREIGN KEY (playerID) REFERENCES Players (playerID)
+);
 
-CREATE TABLE SpectatorFavTeams (userName varchar(50), teamName varchar(50));
-
-CREATE TABLE Coaches (
-    coachID int,
-    firstName varchar(50),
-    lastName varchar(50),
-    joinDate date,
-    birthday date,
-    phoneNumber varchar(15)
+CREATE TABLE SpectatorFavTeams (
+    userName VARCHAR(50),
+    teamName VARCHAR(50),
+    CONSTRAINT spectatorKeys2 PRIMARY KEY (userName, teamName),
+    CONSTRAINT favTeamUser FOREIGN KEY (userName) REFERENCES Spectators (userName),
+    CONSTRAINT favTeams FOREIGN KEY (teamName) REFERENCES Teams (teamName)
 );
 
 CREATE TABLE Posts (
-    postID int,
-    userName varchar(50),
-    content text,
-    timePosted datetime
+    postID INT PRIMARY KEY AUTO_INCREMENT,
+    userName VARCHAR(50) NOT NULL,
+    content text NOT NULL,
+    timePosted DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT postUser FOREIGN KEY (userName) REFERENCES Spectators (userName)
 );
 
 CREATE TABLE Comments (
-    commentID int,
-    postID int,
-    userName varchar(50),
-    content text,
-    timePosted datetime
+    commentID INT PRIMARY KEY AUTO_INCREMENT,
+    postID INT NOT NULL,
+    userName VARCHAR(50) NOT NULL,
+    content text NOT NULL,
+    timePosted DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT commentUser FOREIGN KEY (username) REFERENCES Spectators (userName),
+    CONSTRAINT commentPost FOREIGN KEY (postID) REFERENCES Posts (postID)
 );
 
-CREATE TABLE Likes (userName varchar(50), postID int);
-
-CREATE TABLE GamesPlayed(
-    gameID int,
-    player1ID int,
-    player2ID int,
-    team1 varchar(50),
-    team2 varchar(50),
-    player1Throw varchar(8),
-    player2Throw varchar(8),
-    tournament int,
+CREATE TABLE Likes (
+    userName VARCHAR(50),
+    postID INT,
+    CONSTRAINT likeKeys PRIMARY KEY (userName, postID),
+    CONSTRAINT likeUser FOREIGN KEY (username) REFERENCES Spectators (userName),
+    CONSTRAINT likePost FOREIGN KEY (postID) REFERENCES Posts (postID)
 );
+
+CREATE TABLE Season(seasonYear YEAR PRIMARY KEY);
 
 CREATE TABLE Tournament(
-    tournamentID int,
-    name varchar(50),
-    attendance int,
-    streetAddress varchar(50),
-    city varchar(50),
-    stateAbbrev varchar(2),
-    zipCode varchar(50),
-    startDate date,
-    endDate date,
-    season year,
+    tournamentID INT PRIMARY KEY AUTO_INCREMENT,
+    tournamentName VARCHAR(50) NOT NULL,
+    attendance INT NOT NULL,
+    streetAddress VARCHAR(50) NOT NULL,
+    city VARCHAR(50) NOT NULL,
+    stateAbbrev VARCHAR(2) NOT NULL,
+    zipCode VARCHAR(50) NOT NULL,
+    startDate DATE NOT NULL,
+    endDate DATE NOT NULL,
+    season YEAR NOT NULL,
+    CONSTRAINT tournamentSeason FOREIGN KEY (season) REFERENCES Season (seasonYear)
 );
 
-CREATE TABLE Season(yearPlayed year);
+CREATE TABLE GamesPlayed(
+    gameID INT PRIMARY KEY AUTO_INCREMENT,
+    player1ID INT NOT NULL,
+    player2ID INT NOT NULL,
+    team1 VARCHAR(50) NOT NULL,
+    team2 VARCHAR(50) NOT NULL,
+    player1Throw VARCHAR(8) NOT NULL,
+    player2Throw VARCHAR(8) NOT NULL,
+    tournamentID INT NOT NULL,
+    CONSTRAINT gamePlayer1 FOREIGN KEY (player1ID) REFERENCES Players (playerID),
+    CONSTRAINT gamePlayer2 FOREIGN KEY (player2ID) REFERENCES Players (playerID),
+    CONSTRAINT gameTeam1 FOREIGN KEY (team1) REFERENCES Teams (teamName),
+    CONSTRAINT gameTeam2 FOREIGN KEY (team2) REFERENCES Teams (teamName),
+    CONSTRAINT gameTournament FOREIGN KEY (tournamentID) REFERENCES Tournament (tournamentID)
+);

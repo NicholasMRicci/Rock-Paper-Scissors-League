@@ -1,9 +1,30 @@
 [
   {
     "_id": "cd143d75-fd2b-4039-a514-cd7a5005de02",
-    "colName": "Simple Requests",
+    "colName": "GET Requests",
     "created": "2023-03-29T12:08:58.256Z",
     "sortNum": 10000,
+    "folders": []
+  },
+  {
+    "_id": "e10df47d-0123-4c4b-9b17-79255501359a",
+    "colName": "POST Requests",
+    "created": "2023-04-18T21:34:10.430Z",
+    "sortNum": 30000,
+    "folders": []
+  },
+  {
+    "_id": "7966e9a1-15c7-4c98-a410-c1048abe6d02",
+    "colName": "PUT Requests",
+    "created": "2023-04-18T21:34:47.856Z",
+    "sortNum": 40000,
+    "folders": []
+  },
+  {
+    "_id": "6cc7452a-f11b-4754-87b5-a4a9ce750561",
+    "colName": "DELETE Requests",
+    "created": "2023-04-18T21:34:54.532Z",
+    "sortNum": 50000,
     "folders": []
   }
 ]

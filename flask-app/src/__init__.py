@@ -17,7 +17,7 @@ def create_app():
 
     # these are for the DB object to be able to connect to MySQL.
     app.config['MYSQL_DATABASE_USER'] = 'webapp'
-    app.config['MYSQL_DATABASE_PASSWORD'] = 'ghjf6901'
+    app.config['MYSQL_DATABASE_PASSWORD'] = open('/secrets/db_password.txt').readline()
     app.config['MYSQL_DATABASE_HOST'] = 'db'
     app.config['MYSQL_DATABASE_PORT'] = 3306
     # Change this to your DB name

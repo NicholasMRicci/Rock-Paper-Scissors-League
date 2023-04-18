@@ -44,7 +44,7 @@ def getMatch(gameID):
 @coach.route('/matches', methods=["POST"])
 def insertMatch():
     data = request.json
-    query = "INSERT INTO GamesPlayed (player1ID, player1Throw, player2ID, player2Throw, team1, team2, tournamentID) VALUES (%s, %s, '%s', %s, '%s', '%s', '%s', %s)" % (
+    query = "INSERT INTO GamesPlayed (player1ID, player1Throw, player2ID, player2Throw, team1, team2, tournamentID) VALUES (%s, '%s', %s, '%s', '%s', '%s', %s)" % (
         data["player1ID"], data["player1Throw"], data["player2ID"], data["player2Throw"], data["team1"], data["team2"], data["tournamentID"])
 
     cursor = db.get_db().cursor()
@@ -138,7 +138,7 @@ def updatePlayer(playerID):
     print(request)
     cursor = db.get_db().cursor()
     # work with adding in all player attributes
-    cursor.execute("UPDATE Players SET firstName = '%s', lastName = '%s', joinDate = '%s', birthday = '%s', phoneNumber = '%s', playerStatus = '%s', teamName = '%s') WHERE playerID = %s"
+    cursor.execute("UPDATE Players SET firstName = '%s', lastName = '%s', joinDate = '%s', birthday = '%s', phoneNumber = '%s', playerStatus = '%s', teamName = '%s' WHERE playerID = %s"
                    % (data['firstName'], data['lastName'], data['joinDate'], data['birthday'], data['phoneNumber'], data['playerStatus'], data['teamName'], playerID))
     if cursor.rowcount == 1:
         db.get_db().commit()

@@ -102,10 +102,30 @@ def getPlayerStats(playerID):
         SELECT player2Throw as Throw FROM GamesPlayed WHERE player2ID = %s) allThrows \
         GROUP BY Throw' % (playerID, playerID))
     row_headers = [x[0] for x in cursor.description]
-    json_data = []
+    json_data = {}
+    throws = []
     theData = cursor.fetchall()
     for row in theData:
-        json_data.append(dict(zip(row_headers, row)))
+        throws.append(dict(zip(row_headers, row)))
+    json_data['throwCounts'] = throws
+
+    cursor.execute("SELECT gameID FROM GamesPlayed \
+                WHERE player1ID = %s AND ((player1Throw = 'Rock' AND player2Throw = 'Scissors') OR (player1Throw = 'Scissors' AND player2Throw = 'Paper') OR (player1Throw = 'Paper' AND player2Throw = 'Rock')) \
+                UNION ALL \
+                SELECT gameID as Throw FROM GamesPlayed \
+                WHERE player2ID = %s AND ((player2Throw = 'Rock' AND player1Throw = 'Scissors') OR (player2Throw = 'Scissors' AND player1Throw = 'Paper') OR (player2Throw = 'Paper' AND player1Throw = 'Rock'))" % (playerID, playerID))
+    json_data['winCount'] = cursor.rowcount
+
+    cursor.execute("SELECT gameID FROM GamesPlayed \
+                    WHERE player1ID = %s \
+                    UNION ALL \
+                    SELECT gameID as Throw FROM GamesPlayed \
+                    WHERE player2ID = %s" % (playerID, playerID))
+    json_data['gamesPlayed'] = cursor.rowcount
+
+    json_data['winPercent'] = (
+        json_data['winCount'] / json_data['gamesPlayed']) * 100
+
     the_response = make_response(jsonify(json_data))
     the_response.status_code = 200
     the_response.mimetype = 'application/json'
@@ -120,11 +140,18 @@ def getTeamStats(teamName):
         UNION ALL \
         SELECT player2Throw as Throw FROM GamesPlayed WHERE team2 = '%s') allThrows \
         GROUP BY Throw" % (teamName, teamName))
-    row_headers = [x[0] for x in cursor.description]
-    json_data = []
-    theData = cursor.fetchall()
-    for row in theData:
-        json_data.append(dict(zip(row_headers, row)))
+    json_data = {}
+    json_data['gamesPlayed'] = cursor.rowcount
+
+    cursor.execute("SELECT gameID FROM GamesPlayed \
+                WHERE team1 = '%s' AND ((player1Throw = 'Rock' AND player2Throw = 'Scissors') OR (player1Throw = 'Scissors' AND player2Throw = 'Paper') OR (player1Throw = 'Paper' AND player2Throw = 'Rock')) \
+                UNION ALL \
+                SELECT gameID as Throw FROM GamesPlayed \
+                WHERE team2 = '%s' AND ((player2Throw = 'Rock' AND player1Throw = 'Scissors') OR (player2Throw = 'Scissors' AND player1Throw = 'Paper') OR (player2Throw = 'Paper' AND player1Throw = 'Rock'))" % (teamName, teamName))
+    json_data['winCount'] = cursor.rowcount
+    json_data['winPercent'] = (
+        json_data['winCount'] / json_data['gamesPlayed']) * 100
+
     the_response = make_response(jsonify(json_data))
     the_response.status_code = 200
     the_response.mimetype = 'application/json'
@@ -136,11 +163,14 @@ def getTournamentStats(tournamentID):
     cursor = db.get_db().cursor()
     cursor.execute(
         "SELECT COUNT(tournamentID) as GamesPlayed FROM GamesPlayed WHERE tournamentID = %s" % (tournamentID))
-    row_headers = [x[0] for x in cursor.description]
-    json_data = []
-    theData = cursor.fetchall()
-    for row in theData:
-        json_data.append(dict(zip(row_headers, row)))
+    json_data = {}
+    json_data['gamesPlayed'] = cursor.rowcount
+
+    cursor.execute("SELECT team1 as team FROM GamesPlayed WHERE tournamentID = %s \
+                   UNION \
+                   SELECT team2 as team FROM GamesPlayed WHERE tournamentID = %s" % (tournamentID, tournamentID))
+    json_data['teamsParticipated'] = [team[0] for team in cursor.fetchall()]
+
     the_response = make_response(jsonify(json_data))
     the_response.status_code = 200
     the_response.mimetype = 'application/json'
@@ -152,11 +182,14 @@ def getSeasonStats(seasonID):
     cursor = db.get_db().cursor()
     cursor.execute(
         "SELECT COUNT(gameID) as GamesPlayed FROM GamesPlayed JOIN Tournament T on GamesPlayed.tournamentID = T.tournamentID WHERE T.season = %s" % (seasonID))
-    row_headers = [x[0] for x in cursor.description]
-    json_data = []
-    theData = cursor.fetchall()
-    for row in theData:
-        json_data.append(dict(zip(row_headers, row)))
+    json_data = {}
+    json_data['gamesPlayed'] = cursor.rowcount
+
+    cursor.execute("SELECT team FROM (SELECT team1 as team, tournamentID FROM GamesPlayed UNION SELECT team2 as team, tournamentID FROM GamesPlayed) games \
+                    JOIN Tournament T on games.tournamentID = T.tournamentID \
+                    WHERE T.season = %s;" % (seasonID))
+    json_data['teamsParticipated'] = [team[0] for team in cursor.fetchall()]
+
     the_response = make_response(jsonify(json_data))
     the_response.status_code = 200
     the_response.mimetype = 'application/json'

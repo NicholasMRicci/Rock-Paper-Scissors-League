@@ -33,8 +33,10 @@ def create_app():
 
     # Import the various routes
     from src.coach import coach
+    from src.spectator import spectator
 
     # Register the routes that we just imported so they can be properly handled
     app.register_blueprint(coach,       url_prefix='/c')
+    app.register_blueprint(spectator,       url_prefix='/s')
 
     return app

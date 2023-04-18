@@ -156,3 +156,57 @@ def deletePlayer(playerID):
         db.get_db().commit()
         return make_response('ok', 200)
     return make_response('not ok: ', 301)
+
+
+# --- TEAMS ---
+@coach.route('/teams', methods=["GET"])
+def getTeams():
+    cursor = db.get_db().cursor()
+    cursor.execute('select * from Teams')
+    row_headers = [x[0] for x in cursor.description]
+    json_data = []
+    theData = cursor.fetchall()
+    for row in theData:
+        json_data.append(dict(zip(row_headers, row)))
+    the_response = make_response(jsonify(json_data))
+    the_response.status_code = 200
+    the_response.mimetype = 'application/json'
+    return the_response
+
+
+@coach.route('/teams/<teamName>', methods=["GET"])
+def getTeam(teamName):
+    cursor = db.get_db().cursor()
+    cursor.execute(
+        "select * from Teams WHERE teamName = '%s'" % (teamName))
+    row_headers = [x[0] for x in cursor.description]
+    theData = cursor.fetchall()
+    if cursor.rowcount == 1:
+        the_response = make_response(
+            jsonify((dict(zip(row_headers, theData[0])))))
+        the_response.status_code = 200
+        the_response.mimetype = 'application/json'
+        return the_response
+    else:
+        the_response = make_response()
+        the_response.status_code = 400
+        return the_response
+
+
+@coach.route('/myTeam/<coachID>', methods=["GET"])
+def getMyTeam(coachID):
+    cursor = db.get_db().cursor()
+    cursor.execute(
+        'select * from Teams WHERE coachID = %s' % (coachID))
+    row_headers = [x[0] for x in cursor.description]
+    theData = cursor.fetchall()
+    if cursor.rowcount == 1:
+        the_response = make_response(
+            jsonify((dict(zip(row_headers, theData[0])))))
+        the_response.status_code = 200
+        the_response.mimetype = 'application/json'
+        return the_response
+    else:
+        the_response = make_response()
+        the_response.status_code = 400
+        return the_response

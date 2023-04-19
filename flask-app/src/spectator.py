@@ -101,12 +101,11 @@ def getPlayerStats(playerID):
         UNION ALL \
         SELECT player2Throw as Throw FROM GamesPlayed WHERE player2ID = %s) allThrows \
         GROUP BY Throw' % (playerID, playerID))
-    row_headers = [x[0] for x in cursor.description]
     json_data = {}
-    throws = []
     theData = cursor.fetchall()
+    throws = {}
     for row in theData:
-        throws.append(dict(zip(row_headers, row)))
+        throws[row[0]] = row[1]
     json_data['throwCounts'] = throws
 
     cursor.execute("SELECT gameID FROM GamesPlayed \
@@ -123,8 +122,11 @@ def getPlayerStats(playerID):
                     WHERE player2ID = %s" % (playerID, playerID))
     json_data['gamesPlayed'] = cursor.rowcount
 
-    json_data['winPercent'] = (
-        json_data['winCount'] / json_data['gamesPlayed']) * 100
+    if json_data['gamesPlayed'] == 0:
+        json_data['winPercent'] = 0
+    else:
+        json_data['winPercent'] = (
+            json_data['winCount'] / json_data['gamesPlayed']) * 100
 
     the_response = make_response(jsonify(json_data))
     the_response.status_code = 200
@@ -135,12 +137,23 @@ def getPlayerStats(playerID):
 @spectator.route('/statistics/team/<teamName>', methods=["GET"])
 def getTeamStats(teamName):
     cursor = db.get_db().cursor()
+
     cursor.execute(
         "SELECT Throw, COUNT(Throw) as Count FROM (SELECT player1Throw as Throw FROM GamesPlayed WHERE team1 = '%s' \
         UNION ALL \
         SELECT player2Throw as Throw FROM GamesPlayed WHERE team2 = '%s') allThrows \
         GROUP BY Throw" % (teamName, teamName))
     json_data = {}
+    theData = cursor.fetchall()
+    throws = {}
+    for row in theData:
+        throws[row[0]] = row[1]
+    json_data['throwCounts'] = throws
+
+    cursor.execute(
+        "SELECT gameID FROM GamesPlayed WHERE team1 = '%s' \
+        UNION ALL \
+        SELECT gameID  FROM GamesPlayed WHERE team2 = '%s'" % (teamName, teamName))
     json_data['gamesPlayed'] = cursor.rowcount
 
     cursor.execute("SELECT gameID FROM GamesPlayed \
@@ -149,8 +162,11 @@ def getTeamStats(teamName):
                 SELECT gameID as Throw FROM GamesPlayed \
                 WHERE team2 = '%s' AND ((player2Throw = 'Rock' AND player1Throw = 'Scissors') OR (player2Throw = 'Scissors' AND player1Throw = 'Paper') OR (player2Throw = 'Paper' AND player1Throw = 'Rock'))" % (teamName, teamName))
     json_data['winCount'] = cursor.rowcount
-    json_data['winPercent'] = (
-        json_data['winCount'] / json_data['gamesPlayed']) * 100
+    if json_data['gamesPlayed'] == 0:
+        json_data['winPercent'] = 0
+    else:
+        json_data['winPercent'] = (
+            json_data['winCount'] / json_data['gamesPlayed']) * 100
 
     the_response = make_response(jsonify(json_data))
     the_response.status_code = 200
@@ -190,6 +206,38 @@ def getSeasonStats(seasonID):
                     WHERE T.season = %s;" % (seasonID))
     json_data['teamsParticipated'] = [team[0] for team in cursor.fetchall()]
 
+    the_response = make_response(jsonify(json_data))
+    the_response.status_code = 200
+    the_response.mimetype = 'application/json'
+    return the_response
+
+# Tournaments and Seasons
+
+
+@spectator.route('/tournaments', methods=["GET"])
+def getTournaments():
+    cursor = db.get_db().cursor()
+    cursor.execute('select * from Tournament')
+    row_headers = [x[0] for x in cursor.description]
+    json_data = []
+    theData = cursor.fetchall()
+    for row in theData:
+        json_data.append(dict(zip(row_headers, row)))
+    the_response = make_response(jsonify(json_data))
+    the_response.status_code = 200
+    the_response.mimetype = 'application/json'
+    return the_response
+
+
+@spectator.route('/seasons', methods=["GET"])
+def getSeasons():
+    cursor = db.get_db().cursor()
+    cursor.execute('select * from Season')
+    row_headers = [x[0] for x in cursor.description]
+    json_data = []
+    theData = cursor.fetchall()
+    for row in theData:
+        json_data.append(dict(zip(row_headers, row)))
     the_response = make_response(jsonify(json_data))
     the_response.status_code = 200
     the_response.mimetype = 'application/json'

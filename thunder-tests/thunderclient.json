@@ -13,12 +13,6 @@
     "params": [],
     "tests": [
       {
-        "type": "res-body",
-        "custom": "",
-        "action": "equal",
-        "value": "<h1>Welcome to the Rock Paper Scissors League</h1>"
-      },
-      {
         "type": "res-code",
         "custom": "",
         "action": "equal",
@@ -40,28 +34,10 @@
     "params": [],
     "tests": [
       {
-        "type": "Content-Type",
-        "custom": "",
-        "action": "equal",
-        "value": "application/json"
-      },
-      {
         "type": "res-code",
         "custom": "",
         "action": "equal",
         "value": "200"
-      },
-      {
-        "type": "Content-Length",
-        "custom": "",
-        "action": "equal",
-        "value": "1088"
-      },
-      {
-        "type": "res-body",
-        "custom": "",
-        "action": "equal",
-        "value": "[{\"birthday\":\"Thu, 15 Apr 1999 00:00:00 GMT\",\"firstName\":\"Guthry\",\"joinDate\":\"Wed, 25 Mar 2015 00:00:00 GMT\",\"lastName\":\"Vedeniktov\",\"phoneNumber\":\"511-202-6048\",\"playerID\":1,\"playerStatus\":\"active\",\"teamName\":\"Team9\"},{\"birthday\":\"Fri, 09 Nov 2001 00:00:00 GMT\",\"firstName\":\"Harwell\",\"joinDate\":\"Thu, 29 Jan 2015 00:00:00 GMT\",\"lastName\":\"Basnett\",\"phoneNumber\":\"539-971-5807\",\"playerID\":2,\"playerStatus\":\"active\",\"teamName\":\"Team2\"},{\"birthday\":\"Fri, 07 Nov 1997 00:00:00 GMT\",\"firstName\":\"Teddie\",\"joinDate\":\"Sun, 16 Apr 2017 00:00:00 GMT\",\"lastName\":\"Whatmough\",\"phoneNumber\":\"513-611-0064\",\"playerID\":3,\"playerStatus\":\"doubtful\",\"teamName\":\"Team2\"},{\"birthday\":\"Sun, 27 Oct 1996 00:00:00 GMT\",\"firstName\":\"Benito\",\"joinDate\":\"Thu, 15 Jun 2017 00:00:00 GMT\",\"lastName\":\"Dinkin\",\"phoneNumber\":\"687-303-3546\",\"playerID\":4,\"playerStatus\":\"doubtful\",\"teamName\":\"Team2\"}]"
       }
     ]
   },
@@ -83,18 +59,6 @@
         "custom": "",
         "action": "equal",
         "value": "200"
-      },
-      {
-        "type": "Content-Type",
-        "custom": "",
-        "action": "equal",
-        "value": "application/json"
-      },
-      {
-        "type": "res-body",
-        "custom": "",
-        "action": "equal",
-        "value": "{\"birthday\":\"Fri, 07 Nov 1997 00:00:00 GMT\",\"firstName\":\"Teddie\",\"joinDate\":\"Sun, 16 Apr 2017 00:00:00 GMT\",\"lastName\":\"Whatmough\",\"phoneNumber\":\"513-611-0064\",\"playerID\":3,\"playerStatus\":\"doubtful\",\"teamName\":\"Team2\"}"
       }
     ]
   },
@@ -116,18 +80,6 @@
         "custom": "",
         "action": "equal",
         "value": "200"
-      },
-      {
-        "type": "Content-Type",
-        "custom": "",
-        "action": "equal",
-        "value": "application/json"
-      },
-      {
-        "type": "res-body",
-        "custom": "",
-        "action": "equal",
-        "value": "{\"birthday\":\"Thu, 15 Apr 1999 00:00:00 GMT\",\"firstName\":\"Guthry\",\"joinDate\":\"Wed, 25 Mar 2015 00:00:00 GMT\",\"lastName\":\"Vedeniktov\",\"phoneNumber\":\"511-202-6048\",\"playerID\":1,\"playerStatus\":\"active\",\"teamName\":\"Team9\"}"
       }
     ]
   },
@@ -149,18 +101,6 @@
         "custom": "",
         "action": "equal",
         "value": "200"
-      },
-      {
-        "type": "Content-Type",
-        "custom": "",
-        "action": "equal",
-        "value": "application/json"
-      },
-      {
-        "type": "res-body",
-        "custom": "",
-        "action": "equal",
-        "value": "[{\"gameID\":1,\"player1ID\":3,\"player1Throw\":\"Scissors\",\"player2ID\":4,\"player2Throw\":\"Rock\",\"team1\":\"Team2\",\"team2\":\"Team8\",\"tournamentID\":1},{\"gameID\":2,\"player1ID\":2,\"player1Throw\":\"Rock\",\"player2ID\":4,\"player2Throw\":\"Paper\",\"team1\":\"Team2\",\"team2\":\"Team9\",\"tournamentID\":4},{\"gameID\":3,\"player1ID\":1,\"player1Throw\":\"Scissors\",\"player2ID\":4,\"player2Throw\":\"Scissors\",\"team1\":\"Team2\",\"team2\":\"Team9\",\"tournamentID\":4},{\"gameID\":4,\"player1ID\":2,\"player1Throw\":\"Rock\",\"player2ID\":2,\"player2Throw\":\"Scissors\",\"team1\":\"Team2\",\"team2\":\"Team9\",\"tournamentID\":3}]"
       }
     ]
   },
@@ -182,18 +122,6 @@
         "custom": "",
         "action": "equal",
         "value": "200"
-      },
-      {
-        "type": "Content-Type",
-        "custom": "",
-        "action": "equal",
-        "value": "application/json"
-      },
-      {
-        "type": "res-body",
-        "custom": "",
-        "action": "equal",
-        "value": "{\"gameID\":3,\"player1ID\":1,\"player1Throw\":\"Scissors\",\"player2ID\":4,\"player2Throw\":\"Scissors\",\"team1\":\"Team2\",\"team2\":\"Team9\",\"tournamentID\":4}"
       }
     ]
   },
@@ -215,18 +143,6 @@
         "custom": "",
         "action": "equal",
         "value": "200"
-      },
-      {
-        "type": "Content-Type",
-        "custom": "",
-        "action": "equal",
-        "value": "application/json"
-      },
-      {
-        "type": "res-body",
-        "custom": "",
-        "action": "equal",
-        "value": "{\"gameID\":2,\"player1ID\":2,\"player1Throw\":\"Rock\",\"player2ID\":4,\"player2Throw\":\"Paper\",\"team1\":\"Team2\",\"team2\":\"Team9\",\"tournamentID\":4}"
       }
     ]
   },
@@ -248,18 +164,6 @@
         "custom": "",
         "action": "equal",
         "value": "200"
-      },
-      {
-        "type": "Content-Type",
-        "custom": "",
-        "action": "equal",
-        "value": "application/json"
-      },
-      {
-        "type": "res-body",
-        "custom": "",
-        "action": "equal",
-        "value": "[{\"city\":\"Waco\",\"coachID\":2,\"joinDate\":\"Sat, 11 Jun 2022 00:00:00 GMT\",\"stateAbbrev\":\"TX\",\"streetAddress\":\"57 Buhler Way\",\"teamName\":\"Team1\",\"zipCode\":\"76796\"},{\"city\":\"Virginia Beach\",\"coachID\":1,\"joinDate\":\"Sat, 17 Nov 2018 00:00:00 GMT\",\"stateAbbrev\":\"VA\",\"streetAddress\":\"7736 Mockingbird Center\",\"teamName\":\"Team2\",\"zipCode\":\"23464\"},{\"city\":\"Shawnee Mission\",\"coachID\":3,\"joinDate\":\"Mon, 19 Jun 2017 00:00:00 GMT\",\"stateAbbrev\":\"KS\",\"streetAddress\":\"135 Cascade Avenue\",\"teamName\":\"Team8\",\"zipCode\":\"66205\"},{\"city\":\"Brockton\",\"coachID\":3,\"joinDate\":\"Wed, 19 Dec 2018 00:00:00 GMT\",\"stateAbbrev\":\"MA\",\"streetAddress\":\"173 Rieder Terrace\",\"teamName\":\"Team9\",\"zipCode\":\"2305\"}]"
       }
     ]
   },
@@ -281,18 +185,6 @@
         "custom": "",
         "action": "equal",
         "value": "200"
-      },
-      {
-        "type": "Content-Type",
-        "custom": "",
-        "action": "equal",
-        "value": "application/json"
-      },
-      {
-        "type": "res-body",
-        "custom": "",
-        "action": "equal",
-        "value": "{\"city\":\"Shawnee Mission\",\"coachID\":3,\"joinDate\":\"Mon, 19 Jun 2017 00:00:00 GMT\",\"stateAbbrev\":\"KS\",\"streetAddress\":\"135 Cascade Avenue\",\"teamName\":\"Team8\",\"zipCode\":\"66205\"}"
       }
     ]
   },
@@ -314,18 +206,6 @@
         "custom": "",
         "action": "equal",
         "value": "200"
-      },
-      {
-        "type": "Content-Type",
-        "custom": "",
-        "action": "equal",
-        "value": "application/json"
-      },
-      {
-        "type": "res-body",
-        "custom": "",
-        "action": "equal",
-        "value": "{\"city\":\"Brockton\",\"coachID\":3,\"joinDate\":\"Wed, 19 Dec 2018 00:00:00 GMT\",\"stateAbbrev\":\"MA\",\"streetAddress\":\"173 Rieder Terrace\",\"teamName\":\"Team9\",\"zipCode\":\"2305\"}"
       }
     ]
   },
@@ -347,18 +227,6 @@
         "custom": "",
         "action": "equal",
         "value": "200"
-      },
-      {
-        "type": "Content-Type",
-        "custom": "",
-        "action": "equal",
-        "value": "application/json"
-      },
-      {
-        "type": "res-body",
-        "custom": "",
-        "action": "equal",
-        "value": "{\"city\":\"Virginia Beach\",\"coachID\":1,\"joinDate\":\"Sat, 17 Nov 2018 00:00:00 GMT\",\"stateAbbrev\":\"VA\",\"streetAddress\":\"7736 Mockingbird Center\",\"teamName\":\"Team2\",\"zipCode\":\"23464\"}"
       }
     ]
   },
@@ -380,18 +248,6 @@
         "custom": "",
         "action": "equal",
         "value": "200"
-      },
-      {
-        "type": "Content-Type",
-        "custom": "",
-        "action": "equal",
-        "value": "application/json"
-      },
-      {
-        "type": "res-body",
-        "custom": "",
-        "action": "equal",
-        "value": "{\"city\":\"Waco\",\"coachID\":2,\"joinDate\":\"Sat, 11 Jun 2022 00:00:00 GMT\",\"stateAbbrev\":\"TX\",\"streetAddress\":\"57 Buhler Way\",\"teamName\":\"Team1\",\"zipCode\":\"76796\"}"
       }
     ]
   },
@@ -413,18 +269,6 @@
         "custom": "",
         "action": "equal",
         "value": "200"
-      },
-      {
-        "type": "Content-Type",
-        "custom": "",
-        "action": "equal",
-        "value": "application/json"
-      },
-      {
-        "type": "res-body",
-        "custom": "",
-        "action": "equal",
-        "value": "[]"
       }
     ]
   },
@@ -446,18 +290,6 @@
         "custom": "",
         "action": "equal",
         "value": "200"
-      },
-      {
-        "type": "Content-Type",
-        "custom": "",
-        "action": "equal",
-        "value": "application/json"
-      },
-      {
-        "type": "res-body",
-        "custom": "",
-        "action": "equal",
-        "value": "[{\"playerID\":2}]"
       }
     ]
   },
@@ -479,18 +311,6 @@
         "custom": "",
         "action": "equal",
         "value": "200"
-      },
-      {
-        "type": "Content-Type",
-        "custom": "",
-        "action": "equal",
-        "value": "application/json"
-      },
-      {
-        "type": "res-body",
-        "custom": "",
-        "action": "equal",
-        "value": "[]"
       }
     ]
   },
@@ -512,18 +332,6 @@
         "custom": "",
         "action": "equal",
         "value": "200"
-      },
-      {
-        "type": "Content-Type",
-        "custom": "",
-        "action": "equal",
-        "value": "application/json"
-      },
-      {
-        "type": "res-body",
-        "custom": "",
-        "action": "equal",
-        "value": "[{\"teamName\":\"Team2\"}]"
       }
     ]
   },
@@ -545,18 +353,6 @@
         "custom": "",
         "action": "equal",
         "value": "200"
-      },
-      {
-        "type": "Content-Type",
-        "custom": "",
-        "action": "equal",
-        "value": "application/json"
-      },
-      {
-        "type": "res-body",
-        "custom": "",
-        "action": "equal",
-        "value": "{\"gamesPlayed\":1,\"throwCounts\":[{\"Count\":1,\"Throw\":\"Scissors\"}],\"winCount\":0,\"winPercent\":0.0}"
       }
     ]
   },
@@ -578,18 +374,6 @@
         "custom": "",
         "action": "equal",
         "value": "200"
-      },
-      {
-        "type": "Content-Type",
-        "custom": "",
-        "action": "equal",
-        "value": "application/json"
-      },
-      {
-        "type": "res-body",
-        "custom": "",
-        "action": "equal",
-        "value": "{\"gamesPlayed\":1,\"throwCounts\":[{\"Count\":1,\"Throw\":\"Scissors\"}],\"winCount\":0,\"winPercent\":0.0}"
       }
     ]
   },
@@ -611,18 +395,6 @@
         "custom": "",
         "action": "equal",
         "value": "200"
-      },
-      {
-        "type": "Content-Type",
-        "custom": "",
-        "action": "equal",
-        "value": "application/json"
-      },
-      {
-        "type": "res-body",
-        "custom": "",
-        "action": "equal",
-        "value": "{\"gamesPlayed\":1,\"winCount\":1,\"winPercent\":100.0}"
       }
     ]
   },
@@ -644,18 +416,6 @@
         "custom": "",
         "action": "equal",
         "value": "200"
-      },
-      {
-        "type": "Content-Type",
-        "custom": "",
-        "action": "equal",
-        "value": "application/json"
-      },
-      {
-        "type": "res-body",
-        "custom": "",
-        "action": "equal",
-        "value": "{\"gamesPlayed\":2,\"winCount\":1,\"winPercent\":50.0}"
       }
     ]
   },
@@ -677,18 +437,6 @@
         "custom": "",
         "action": "equal",
         "value": "200"
-      },
-      {
-        "type": "Content-Type",
-        "custom": "",
-        "action": "equal",
-        "value": "application/json"
-      },
-      {
-        "type": "res-body",
-        "custom": "",
-        "action": "equal",
-        "value": "{\"gamesPlayed\":1,\"teamsParticipated\":[\"Team2\",\"Team9\"]}"
       }
     ]
   },
@@ -710,18 +458,6 @@
         "custom": "",
         "action": "equal",
         "value": "200"
-      },
-      {
-        "type": "Content-Type",
-        "custom": "",
-        "action": "equal",
-        "value": "application/json"
-      },
-      {
-        "type": "res-body",
-        "custom": "",
-        "action": "equal",
-        "value": "{\"gamesPlayed\":1,\"teamsParticipated\":[]}"
       }
     ]
   },
@@ -743,18 +479,6 @@
         "custom": "",
         "action": "equal",
         "value": "200"
-      },
-      {
-        "type": "Content-Type",
-        "custom": "",
-        "action": "equal",
-        "value": "application/json"
-      },
-      {
-        "type": "res-body",
-        "custom": "",
-        "action": "equal",
-        "value": "{\"gamesPlayed\":1,\"teamsParticipated\":[]}"
       }
     ]
   },
@@ -776,18 +500,6 @@
         "custom": "",
         "action": "equal",
         "value": "200"
-      },
-      {
-        "type": "Content-Type",
-        "custom": "",
-        "action": "equal",
-        "value": "application/json"
-      },
-      {
-        "type": "res-body",
-        "custom": "",
-        "action": "equal",
-        "value": "{\"gamesPlayed\":1,\"teamsParticipated\":[\"Team2\",\"Team9\"]}"
       }
     ]
   },
@@ -864,7 +576,7 @@
     "_id": "e334b55c-e106-4df1-b701-71ea332c1410",
     "colId": "7966e9a1-15c7-4c98-a410-c1048abe6d02",
     "containerId": "",
-    "name": "PUT new match",
+    "name": "PUT match 1",
     "url": "localhost:8002/c/matches/1",
     "method": "PUT",
     "sortNum": 10000,
@@ -980,7 +692,7 @@
     "_id": "1037a6f0-1f40-4e55-9523-5f207c6cddb7",
     "colId": "7966e9a1-15c7-4c98-a410-c1048abe6d02",
     "containerId": "",
-    "name": "PUT another new match",
+    "name": "PUT match 3",
     "url": "localhost:8002/c/matches/3",
     "method": "PUT",
     "sortNum": 20000,
@@ -1058,7 +770,7 @@
     "_id": "f025ffab-ff66-436e-bdf2-4907e65d36a2",
     "colId": "7966e9a1-15c7-4c98-a410-c1048abe6d02",
     "containerId": "",
-    "name": "PUT new player",
+    "name": "PUT Player 3",
     "url": "localhost:8002/c/players/3",
     "method": "PUT",
     "sortNum": 20000,
@@ -1084,7 +796,7 @@
     "_id": "97cd4cf1-3f0d-4d19-adea-8252ba4d9257",
     "colId": "7966e9a1-15c7-4c98-a410-c1048abe6d02",
     "containerId": "",
-    "name": "PUT another new player ",
+    "name": "PUT player 6 ",
     "url": "localhost:8002/c/players/6",
     "method": "PUT",
     "sortNum": 30000,
@@ -1131,12 +843,12 @@
     "_id": "1d617991-639a-4be0-9771-3e711460baa4",
     "colId": "e10df47d-0123-4c4b-9b17-79255501359a",
     "containerId": "",
-    "name": "POST taylorlol new favorite player",
-    "url": "localhost:8002/s/favoritePlayers/taylorlol/5",
+    "name": "POST awestmancoat8 new favorite player",
+    "url": "localhost:8002/s/favoritePlayers/awestmancoat8/6",
     "method": "POST",
     "sortNum": 30000,
     "created": "2023-04-18T22:05:08.531Z",
-    "modified": "2023-04-19T13:36:04.316Z",
+    "modified": "2023-04-20T22:56:10.057Z",
     "headers": [],
     "params": [],
     "tests": [
@@ -1152,12 +864,12 @@
     "_id": "2bd8d70c-a50c-4716-b2b6-63268e8c40e4",
     "colId": "e10df47d-0123-4c4b-9b17-79255501359a",
     "containerId": "",
-    "name": "POST jamesxd new favorite player",
-    "url": "localhost:8002/s/favoritePlayers/jamesxd/5",
+    "name": "POST tarkcolly new favorite player",
+    "url": "localhost:8002/s/favoritePlayers/tarkcolly/5",
     "method": "POST",
     "sortNum": 40000,
     "created": "2023-04-18T22:06:20.921Z",
-    "modified": "2023-04-19T13:36:13.218Z",
+    "modified": "2023-04-20T22:55:58.755Z",
     "headers": [],
     "params": [],
     "tests": [
@@ -1173,12 +885,12 @@
     "_id": "7822dfbf-5213-485e-b781-071bc4cd87ae",
     "colId": "6cc7452a-f11b-4754-87b5-a4a9ce750561",
     "containerId": "",
-    "name": "DELETE taylorlol favorite player 5",
-    "url": "localhost:8002/s/favoritePlayers/taylorlol/5",
+    "name": "DELETE dsamples favorite player 5",
+    "url": "localhost:8002/s/favoritePlayers/dsamples/40",
     "method": "DELETE",
     "sortNum": 30000,
     "created": "2023-04-18T22:07:06.725Z",
-    "modified": "2023-04-19T13:37:52.765Z",
+    "modified": "2023-04-20T22:57:14.664Z",
     "headers": [],
     "params": [],
     "tests": [
@@ -1194,12 +906,12 @@
     "_id": "e0fba05f-c99b-42e9-8da8-e9d5af8bfb5b",
     "colId": "e10df47d-0123-4c4b-9b17-79255501359a",
     "containerId": "",
-    "name": "POST taylorlol new favorite team",
-    "url": "localhost:8002/s/favoriteTeams/jamesxd/Team8",
+    "name": "POST awestmancoat8 new favorite team",
+    "url": "localhost:8002/s/favoriteTeams/awestmancoat8/Team8",
     "method": "POST",
     "sortNum": 40000,
     "created": "2023-04-18T22:08:32.891Z",
-    "modified": "2023-04-19T13:36:22.401Z",
+    "modified": "2023-04-20T22:59:09.841Z",
     "headers": [],
     "params": [],
     "tests": [
@@ -1215,12 +927,12 @@
     "_id": "dbe6b054-7314-40f3-9176-f60d3e60c813",
     "colId": "e10df47d-0123-4c4b-9b17-79255501359a",
     "containerId": "",
-    "name": "POST jamesxd new favorite team",
-    "url": "localhost:8002/s/favoriteTeams/taylorlol/Team8",
+    "name": "POST tarkcolly new favorite team",
+    "url": "localhost:8002/s/favoriteTeams/tarkcolly/Team8",
     "method": "POST",
     "sortNum": 50000,
     "created": "2023-04-18T22:09:08.025Z",
-    "modified": "2023-04-19T13:36:30.083Z",
+    "modified": "2023-04-20T22:59:16.679Z",
     "headers": [],
     "params": [],
     "tests": [
@@ -1236,12 +948,180 @@
     "_id": "201a3e21-ba43-4e01-8219-6dddf31ab66a",
     "colId": "6cc7452a-f11b-4754-87b5-a4a9ce750561",
     "containerId": "",
-    "name": "DELETE taylorlol favorite team Team8",
-    "url": "localhost:8002/s/favoriteTeams/taylorlol/Team8",
+    "name": "DELETE dsamples favorite team Team8",
+    "url": "localhost:8002/s/favoriteTeams/dsamples/Team6",
     "method": "DELETE",
     "sortNum": 40000,
     "created": "2023-04-18T22:09:27.284Z",
-    "modified": "2023-04-19T13:38:00.013Z",
+    "modified": "2023-04-20T22:57:23.427Z",
+    "headers": [],
+    "params": [],
+    "tests": [
+      {
+        "type": "res-code",
+        "custom": "",
+        "action": "equal",
+        "value": "200"
+      }
+    ]
+  },
+  {
+    "_id": "6f2effbd-ab20-47b0-a267-7c37bf68c39b",
+    "colId": "cd143d75-fd2b-4039-a514-cd7a5005de02",
+    "containerId": "",
+    "name": "GET Tournaments",
+    "url": "http://localhost:8002/s/tournaments",
+    "method": "GET",
+    "sortNum": 290000,
+    "created": "2023-04-20T22:32:00.750Z",
+    "modified": "2023-04-20T22:32:27.636Z",
+    "headers": [],
+    "params": [],
+    "tests": [
+      {
+        "type": "res-code",
+        "custom": "",
+        "action": "equal",
+        "value": "200"
+      }
+    ]
+  },
+  {
+    "_id": "eb9a2b74-c006-4510-939c-857967f14b49",
+    "colId": "cd143d75-fd2b-4039-a514-cd7a5005de02",
+    "containerId": "",
+    "name": "GET Seasons",
+    "url": "http://localhost:8002/s/seasons",
+    "method": "GET",
+    "sortNum": 300000,
+    "created": "2023-04-20T22:40:11.235Z",
+    "modified": "2023-04-20T22:40:29.364Z",
+    "headers": [],
+    "params": [],
+    "tests": [
+      {
+        "type": "res-code",
+        "custom": "",
+        "action": "equal",
+        "value": "200"
+      }
+    ]
+  },
+  {
+    "_id": "00156f2b-47c7-43a0-ac5b-5dbda4e8ff8d",
+    "colId": "cd143d75-fd2b-4039-a514-cd7a5005de02",
+    "containerId": "",
+    "name": "GET Spectators",
+    "url": "http://localhost:8002/s/spectators",
+    "method": "GET",
+    "sortNum": 320000,
+    "created": "2023-04-20T22:40:50.868Z",
+    "modified": "2023-04-20T22:41:07.622Z",
+    "headers": [],
+    "params": [],
+    "tests": [
+      {
+        "type": "res-code",
+        "custom": "",
+        "action": "equal",
+        "value": "200"
+      }
+    ]
+  },
+  {
+    "_id": "b2b311e2-543d-46f0-a032-8a55486c95a9",
+    "colId": "cd143d75-fd2b-4039-a514-cd7a5005de02",
+    "containerId": "",
+    "name": "GET Coaches",
+    "url": "http://localhost:8002/c/coaches",
+    "method": "GET",
+    "sortNum": 330000,
+    "created": "2023-04-20T22:41:27.870Z",
+    "modified": "2023-04-20T22:41:41.002Z",
+    "headers": [],
+    "params": [],
+    "tests": [
+      {
+        "type": "res-code",
+        "custom": "",
+        "action": "equal",
+        "value": "200"
+      }
+    ]
+  },
+  {
+    "_id": "d2f242c1-001c-4a47-97ae-c3a5f6944ea7",
+    "colId": "cd143d75-fd2b-4039-a514-cd7a5005de02",
+    "containerId": "",
+    "name": "GET My Team Coach 2",
+    "url": "http://localhost:8002/c/myTeam/2",
+    "method": "GET",
+    "sortNum": 340000,
+    "created": "2023-04-20T22:41:54.139Z",
+    "modified": "2023-04-20T22:42:11.351Z",
+    "headers": [],
+    "params": [],
+    "tests": [
+      {
+        "type": "res-code",
+        "custom": "",
+        "action": "equal",
+        "value": "200"
+      }
+    ]
+  },
+  {
+    "_id": "a255cae4-7680-4d87-9bcf-68b4fb07c256",
+    "colId": "cd143d75-fd2b-4039-a514-cd7a5005de02",
+    "containerId": "",
+    "name": "GET My Team Coach 3",
+    "url": "http://localhost:8002/c/myTeam/3",
+    "method": "GET",
+    "sortNum": 350000,
+    "created": "2023-04-20T22:42:20.646Z",
+    "modified": "2023-04-20T22:42:38.514Z",
+    "headers": [],
+    "params": [],
+    "tests": [
+      {
+        "type": "res-code",
+        "custom": "",
+        "action": "equal",
+        "value": "200"
+      }
+    ]
+  },
+  {
+    "_id": "3e538418-bfcc-411f-9ba8-933aa4a186d4",
+    "colId": "cd143d75-fd2b-4039-a514-cd7a5005de02",
+    "containerId": "",
+    "name": "GET My Team Name Coach 3",
+    "url": "http://localhost:8002/c/myTeamName/3",
+    "method": "GET",
+    "sortNum": 360000,
+    "created": "2023-04-20T22:44:44.481Z",
+    "modified": "2023-04-20T22:44:57.241Z",
+    "headers": [],
+    "params": [],
+    "tests": [
+      {
+        "type": "res-code",
+        "custom": "",
+        "action": "equal",
+        "value": "200"
+      }
+    ]
+  },
+  {
+    "_id": "073faf16-a450-452d-ba69-f547cace67f7",
+    "colId": "cd143d75-fd2b-4039-a514-cd7a5005de02",
+    "containerId": "",
+    "name": "GET My Team Name Coach 5",
+    "url": "http://localhost:8002/c/myTeamName/5",
+    "method": "GET",
+    "sortNum": 370000,
+    "created": "2023-04-20T22:45:03.979Z",
+    "modified": "2023-04-20T22:45:13.640Z",
     "headers": [],
     "params": [],
     "tests": [

@@ -12,7 +12,7 @@ spectator = Blueprint('spectator', __name__)
 def getFavoritePlayers(user):
     cursor = db.get_db().cursor()
     cursor.execute(
-        'select playerID from SpectatorFavPlayers WHERE userName = "%s"' % user)
+        'select Players.* from SpectatorFavPlayers JOIN Players ON SpectatorFavPlayers.playerID = Players.playerID WHERE userName = "%s"' % user)
     row_headers = [x[0] for x in cursor.description]
     json_data = []
     theData = cursor.fetchall()
@@ -54,7 +54,7 @@ def deleteFavoritePlayer(user, playerID):
 def getFavoriteTeams(user):
     cursor = db.get_db().cursor()
     cursor.execute(
-        'select teamName from SpectatorFavTeams WHERE userName = "%s"' % user)
+        'select T.* from SpectatorFavTeams JOIN Teams T on SpectatorFavTeams.teamName = T.teamName WHERE userName = "%s"' % user)
     row_headers = [x[0] for x in cursor.description]
     json_data = []
     theData = cursor.fetchall()
@@ -178,7 +178,7 @@ def getTeamStats(teamName):
 def getTournamentStats(tournamentID):
     cursor = db.get_db().cursor()
     cursor.execute(
-        "SELECT COUNT(tournamentID) as GamesPlayed FROM GamesPlayed WHERE tournamentID = %s" % (tournamentID))
+        "SELECT tournamentID FROM GamesPlayed WHERE tournamentID = %s" % (tournamentID))
     json_data = {}
     json_data['gamesPlayed'] = cursor.rowcount
 
@@ -197,7 +197,7 @@ def getTournamentStats(tournamentID):
 def getSeasonStats(seasonID):
     cursor = db.get_db().cursor()
     cursor.execute(
-        "SELECT COUNT(gameID) as GamesPlayed FROM GamesPlayed JOIN Tournament T on GamesPlayed.tournamentID = T.tournamentID WHERE T.season = %s" % (seasonID))
+        "SELECT gameID FROM GamesPlayed JOIN Tournament T on GamesPlayed.tournamentID = T.tournamentID WHERE T.season = %s" % (seasonID))
     json_data = {}
     json_data['gamesPlayed'] = cursor.rowcount
 
@@ -233,6 +233,24 @@ def getTournaments():
 def getSeasons():
     cursor = db.get_db().cursor()
     cursor.execute('select * from Season')
+    row_headers = [x[0] for x in cursor.description]
+    json_data = []
+    theData = cursor.fetchall()
+    for row in theData:
+        json_data.append(dict(zip(row_headers, row)))
+    the_response = make_response(jsonify(json_data))
+    the_response.status_code = 200
+    the_response.mimetype = 'application/json'
+    return the_response
+
+# Users Helper
+
+
+@spectator.route('/spectators', methods=["GET"])
+def getUsers():
+    cursor = db.get_db().cursor()
+    cursor.execute(
+        'select userName as label, userName as value from Spectators')
     row_headers = [x[0] for x in cursor.description]
     json_data = []
     theData = cursor.fetchall()

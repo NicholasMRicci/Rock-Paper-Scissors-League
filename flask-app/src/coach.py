@@ -120,7 +120,6 @@ def getPlayer(playerID):
 @ coach.route('/players', methods=["POST"])
 def insertPlayer():
     data = request.json
-    print(request)
     cursor = db.get_db().cursor()
     # work with adding in all player attributes
     cursor.execute("INSERT INTO Players (firstName, lastName, joinDate, birthday, phoneNumber, playerStatus) \
@@ -135,11 +134,14 @@ def insertPlayer():
 @ coach.route('/players/<playerID>', methods=["PUT"])
 def updatePlayer(playerID):
     data = request.json
-    print(request)
     cursor = db.get_db().cursor()
     # work with adding in all player attributes
-    cursor.execute("UPDATE Players SET firstName = '%s', lastName = '%s', joinDate = '%s', birthday = '%s', phoneNumber = '%s', playerStatus = '%s', teamName = '%s' WHERE playerID = %s"
-                   % (data['firstName'], data['lastName'], data['joinDate'], data['birthday'], data['phoneNumber'], data['playerStatus'], data['teamName'], playerID))
+    if "teamName" in data:
+        cursor.execute("UPDATE Players SET firstName = '%s', lastName = '%s', joinDate = '%s', birthday = '%s', phoneNumber = '%s', playerStatus = '%s', teamName = '%s' WHERE playerID = %s"
+                       % (data['firstName'], data['lastName'], data['joinDate'], data['birthday'], data['phoneNumber'], data['playerStatus'], data['teamName'], playerID))
+    else:
+        cursor.execute("UPDATE Players SET firstName = '%s', lastName = '%s', joinDate = '%s', birthday = '%s', phoneNumber = '%s', playerStatus = '%s', teamName = NULL WHERE playerID = %s"
+                       % (data['firstName'], data['lastName'], data['joinDate'], data['birthday'], data['phoneNumber'], data['playerStatus'], playerID))
     if cursor.rowcount == 1:
         db.get_db().commit()
         return make_response('ok', 200)
@@ -197,16 +199,42 @@ def getTeam(teamName):
 def getMyTeam(coachID):
     cursor = db.get_db().cursor()
     cursor.execute(
-        'select * from Teams WHERE coachID = %s' % (coachID))
+        'SELECT P.* FROM Teams JOIN Players P ON Teams.teamName = P.teamName WHERE Teams.coachID = %s' % (coachID))
     row_headers = [x[0] for x in cursor.description]
+    json_data = []
     theData = cursor.fetchall()
-    if cursor.rowcount == 1:
-        the_response = make_response(
-            jsonify((dict(zip(row_headers, theData[0])))))
-        the_response.status_code = 200
-        the_response.mimetype = 'application/json'
-        return the_response
-    else:
-        the_response = make_response()
-        the_response.status_code = 400
-        return the_response
+    for row in theData:
+        json_data.append(dict(zip(row_headers, row)))
+    the_response = make_response(jsonify(json_data))
+    the_response.status_code = 200
+    the_response.mimetype = 'application/json'
+    return the_response
+
+
+@coach.route('/myTeamName/<coachID>', methods=["GET"])
+def getMyTeamName(coachID):
+    cursor = db.get_db().cursor()
+    cursor.execute(
+        'SELECT teamName FROM Teams WHERE coachID = %s' % (coachID))
+    json_data = cursor.fetchall()[0][0]
+    the_response = make_response(json_data)
+    the_response.status_code = 200
+    the_response.mimetype = 'application/json'
+    return the_response
+
+# Coaches
+
+
+@coach.route('/coaches', methods=["GET"])
+def getCoaches():
+    cursor = db.get_db().cursor()
+    cursor.execute('select * from Coaches')
+    row_headers = [x[0] for x in cursor.description]
+    json_data = []
+    theData = cursor.fetchall()
+    for row in theData:
+        json_data.append(dict(zip(row_headers, row)))
+    the_response = make_response(jsonify(json_data))
+    the_response.status_code = 200
+    the_response.mimetype = 'application/json'
+    return the_response

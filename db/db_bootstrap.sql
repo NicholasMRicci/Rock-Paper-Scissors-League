@@ -52,7 +52,7 @@ CREATE TABLE Players (
     joinDate DATE NOT NULL,
     playerStatus VARCHAR(50) NOT NULL,
     phoneNumber VARCHAR(15) NOT NULL,
-    teamName VARCHAR(50),
+    teamName VARCHAR(50) NULL,
     CONSTRAINT playerTeam FOREIGN KEY (teamName) REFERENCES Teams (teamName)
 );
 
